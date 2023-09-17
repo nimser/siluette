@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  border: 1px solid orangered;
+  border-radius: 2rem;
+}
+
+.container > * {
+  flex: 1;
+  padding: 2rem;
+}

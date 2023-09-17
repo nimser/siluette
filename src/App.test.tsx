@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react"
 import App from "./App"
+import userEvent, { UserEvent } from "@testing-library/user-event"
+
+let user: UserEvent
 
 beforeEach(() => {
+  user = userEvent.setup()
   render(<App />)
 })
 describe("happy path", () => {
@@ -16,12 +20,20 @@ describe("happy path", () => {
 })
 
 describe("App component", () => {
-  it.skip("should render the UI", () => {
+  it("should render the UI", () => {
     expect(screen.getByText(/Customize your avatar/)).toBeInTheDocument()
   })
 
-  it.skip("should preview name when typing", () => {
-    //
+  it("should preview name when typing", async () => {
+    const nameInput = screen.getByLabelText("name")
+    const namePreview = screen.getByTestId("name-preview")
+    await user.click(nameInput)
+    await user.keyboard("Kiroko")
+
+    console.log(nameInput)
+
+    expect(nameInput).toHaveValue("Kiroko")
+    expect(namePreview).toHaveTextContent("Kiroko")
   })
   it.skip("should set team color in preview when selecting team", () => {
     //
