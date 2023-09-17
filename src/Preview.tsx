@@ -13,6 +13,11 @@ const Preview = ({ character }: PreviewProps) => {
       <img
         src={character.avatar || defaultAvatar}
         alt="avatar"
+        className={
+          character.team
+            ? `${styles.avatar} ${styles.team} ${styles[character.team]}`
+            : undefined
+        }
         data-testid="avatar"
       />
       <h3 data-testid="name-preview">{character.name}</h3>

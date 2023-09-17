@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react"
 import styles from "./App.module.css"
 import Form from "./Form"
 import Preview from "./Preview"
+import { SelectChangeEvent } from "@mui/material"
 
 export interface Character {
   name: string
@@ -9,6 +10,11 @@ export interface Character {
   avatar: string | null
   favorites: string[]
 }
+
+export type FormChangeEvent =
+  | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  | SelectChangeEvent<unknown>
+export type FormChangeHandler = (e: FormChangeEvent) => void
 
 function App() {
   const [formData, setFormData] = useState<Character>({
@@ -18,12 +24,12 @@ function App() {
     favorites: [],
   })
 
-  const updateFormData = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateFormData = (e: FormChangeEvent) => {
     const { name, value } = e.target
 
     setFormData({
       ...formData,
-      [name]: value,
+      [name as string]: value,
     })
   }
 

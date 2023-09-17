@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { getByTestId, render, screen } from "@testing-library/react"
 import App from "./App"
 import userEvent, { UserEvent } from "@testing-library/user-event"
 
@@ -25,10 +25,9 @@ describe("App component", () => {
   })
 
   it("should preview name when typing", async () => {
-    const nameInput = screen.getByLabelText("name")
+    const nameInput = screen.getByLabelText("Name")
     const namePreview = screen.getByTestId("name-preview")
-    await user.click(nameInput)
-    await user.keyboard("Kiroko")
+    await user.type(nameInput, "Kiroko")
 
     expect(nameInput).toHaveValue("Kiroko")
     expect(namePreview).toHaveTextContent("Kiroko")
@@ -39,8 +38,19 @@ describe("App component", () => {
       "/defaultAvatar.png"
     )
   })
-  it.skip("should set team color in preview when selecting team", () => {
-    //
+  it("should set team color in preview when selecting team", async () => {
+    const avatar = screen.getByTestId("avatar")
+    // const select = screen.getByTestId("select-team")
+    await user.click(
+      screen.getByRole("button", {
+        name: /team ​/i,
+      })
+    )
+    const designerOption = screen.getByRole("option", {
+      name: /designers/i,
+    })
+    await user.click(designerOption)
+    expect(avatar).toHaveClass("team team-designers")
   })
   it.skip("should preview image when uploading", () => {
     //
