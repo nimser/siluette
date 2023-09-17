@@ -30,10 +30,14 @@ describe("App component", () => {
     await user.click(nameInput)
     await user.keyboard("Kiroko")
 
-    console.log(nameInput)
-
     expect(nameInput).toHaveValue("Kiroko")
     expect(namePreview).toHaveTextContent("Kiroko")
+  })
+  it("should load a default avatar", () => {
+    expect(screen.getByTestId("avatar")).toHaveAttribute(
+      "src",
+      "/defaultAvatar.png"
+    )
   })
   it.skip("should set team color in preview when selecting team", () => {
     //
