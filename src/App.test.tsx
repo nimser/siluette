@@ -40,7 +40,6 @@ describe("App component", () => {
   })
   it("should set team color in preview when selecting team", async () => {
     const avatar = screen.getByTestId("avatar")
-    // const select = screen.getByTestId("select-team")
     await user.click(
       screen.getByRole("button", {
         name: /team ​/i,
@@ -50,12 +49,16 @@ describe("App component", () => {
       name: /designers/i,
     })
     await user.click(designerOption)
-    expect(avatar).toHaveClass("team team-designers")
+    expect(avatar.className).toMatch(/designers/i)
   })
-  it.skip("should preview image when uploading", () => {
-    //
+  it.skip("should preview image when uploading", async () => {
+    const file = new File(["hello"], "hello.png", { type: "image/png" })
+    const input = screen.getByTestId("upload") as HTMLInputElement
+    await userEvent.upload(input, file)
+    expect(input.files![0]).toBe(file)
+    expect(screen.getByTestId("avatar").getAttribute("src")).toMatch(/hello/)
   })
-  it.skip("should set icons for interrests when selected", () => {
+  it.skip("should set icons for interests when selected", () => {
     //
   })
   it.skip("should prevent clicking Done if Some info isn't set", () => {

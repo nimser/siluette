@@ -16,7 +16,7 @@ const Preview = ({ character }: PreviewProps) => {
         className={
           character.team
             ? `${styles.avatar} ${styles.team} ${styles[character.team]}`
-            : undefined
+            : `${styles.avatar}`
         }
         data-testid="avatar"
       />

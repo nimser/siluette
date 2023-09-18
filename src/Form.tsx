@@ -1,7 +1,9 @@
 import styles from "./Form.module.css"
 
 import {
+  Button,
   FormControl,
+  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -38,6 +40,19 @@ const Form = ({ formData, handleInputChange }: FormProps) => (
         <MenuItem value="devops">DevOps</MenuItem>
       </Select>
     </FormControl>
+    <Input
+      type="file"
+      name="avatar"
+      inputProps={{ accept: "image/*", "data-testid": "upload" }}
+      onChange={handleInputChange}
+      style={{ display: "none" }}
+      id="file-upload-input"
+    />
+    <label htmlFor="file-upload-input">
+      <Button variant="contained" color="primary" component="span">
+        Upload File
+      </Button>
+    </label>
   </div>
 )
 

@@ -25,8 +25,15 @@ function App() {
   })
 
   const updateFormData = (e: FormChangeEvent) => {
-    const { name, value } = e.target
+    const { name, value, type, files } = e.target as HTMLInputElement
 
+    if (files?.length && type === "file") {
+      setFormData({
+        ...formData,
+        [name as string]: URL.createObjectURL(files[0]),
+      })
+      return
+    }
     setFormData({
       ...formData,
       [name as string]: value,
