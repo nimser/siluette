@@ -25,3 +25,24 @@
 .team.devops {
   border-color: green;
 }
+
+.avatarContainer {
+  position: relative;
+}
+
+.avatarOverlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+  gap: 1rem;
+  top: 0;
+  height: 10rem;
+}
+
+.icon {
+  background: #fffe;
+  padding: 3px;
+  border-radius: 3px;
+}

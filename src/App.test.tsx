@@ -1,4 +1,4 @@
-import { getByTestId, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import App from "./App"
 import userEvent, { UserEvent } from "@testing-library/user-event"
 
@@ -58,8 +58,13 @@ describe("App component", () => {
     expect(input.files![0]).toBe(file)
     expect(screen.getByTestId("avatar").getAttribute("src")).toMatch(/hello/)
   })
-  it.skip("should set icons for interests when selected", () => {
-    //
+  it("should set icons for interests when selected", async () => {
+    const avatarBadge = screen.getByTestId("avatar-badge")
+    const figmaBox = screen.getByLabelText("Figma")
+    const reactBox = screen.getByLabelText("React")
+    await user.click(figmaBox)
+    await user.click(reactBox)
+    expect(avatarBadge).toHaveLength(2)
   })
   it.skip("should prevent clicking Done if Some info isn't set", () => {
     //

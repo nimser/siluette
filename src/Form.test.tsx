@@ -1,16 +1,17 @@
 import { render, screen } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
-import CheckboxGroup from "./CheckBoxGroup"
-describe("CheckboxGroup component", () => {
+import Form from "./Form"
+describe("Form component", () => {
   it("should set max amount of choices based on props", async () => {
     const user = userEvent.setup()
-    render(<CheckboxGroup items={["one", "two", "three", "four", "five"]} />)
-    const firstBox = screen.getByLabelText("one")
-    console.log(firstBox)
-    const secondBox = screen.getByLabelText("two")
-    const thirdBox = screen.getByLabelText("three")
-    const fourthBox = screen.getByLabelText("four")
-    const fifthBox = screen.getByLabelText("five")
+    render(
+      <Form formData={{ name: "", avatar: "", favorites: [], team: "" }} />
+    )
+    const firstBox = screen.getByLabelText("React")
+    const secondBox = screen.getByLabelText("Typescript")
+    const thirdBox = screen.getByLabelText("Figma")
+    const fourthBox = screen.getByLabelText("Github")
+    const fifthBox = screen.getByLabelText("Express")
     await user.click(firstBox)
     await user.click(secondBox)
     await user.click(thirdBox)
