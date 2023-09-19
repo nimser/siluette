@@ -11,6 +11,7 @@ export interface Character {
 }
 
 function App() {
+  const [done, setDone] = useState(false)
   const [characterData, setCharacterData] = useState<Character>({
     name: "",
     team: "",
@@ -22,8 +23,12 @@ function App() {
     <>
       <h1>Customize your avatar</h1>
       <div className={styles.container}>
-        <Form formData={characterData} setFormData={setCharacterData} />
-        <Preview character={characterData} />
+        <div
+          className={`${styles.transitionContainer} ${done ? styles.done : ""}`}
+        >
+          <Form formData={characterData} setFormData={setCharacterData} />
+        </div>
+        <Preview character={characterData} setDone={setDone} done={done} />
       </div>
     </>
   )

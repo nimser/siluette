@@ -31,9 +31,10 @@ const GROUPS = ["Web Devs", "Designers", "DevOps"]
 interface FormProps {
   formData: Character
   setFormData?: Dispatch<SetStateAction<Character>>
+  className?: string
 }
 
-const Form = ({ formData, setFormData }: FormProps) => {
+const Form = ({ formData, setFormData, className }: FormProps) => {
   useEffect(() => {
     updateFavorites()
   })

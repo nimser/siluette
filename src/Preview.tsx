@@ -2,15 +2,19 @@ import styles from "./Preview.module.css"
 import defaultAvatar from "/defaultAvatar.png"
 import { Character } from "./App"
 import { Icon } from "@iconify/react"
+import { Button } from "@mui/material"
+import { Dispatch, SetStateAction } from "react"
 
 interface PreviewProps {
   character: Character
+  setDone: Dispatch<SetStateAction<boolean>>
+  done: boolean
 }
 
-const Preview = ({ character }: PreviewProps) => {
+const Preview = ({ character, setDone, done }: PreviewProps) => {
   return (
     <div className={styles.preview}>
-      <h2>Preview</h2>
+      <h2 data-testid="name-preview">{character.name}</h2>
       <div className={styles.avatarContainer}>
         <img
           src={character.avatar || defaultAvatar}
@@ -34,7 +38,20 @@ const Preview = ({ character }: PreviewProps) => {
           ))}
         </div>
       </div>
-      <h3 data-testid="name-preview">{character.name}</h3>
+      {!done &&
+        character.name &&
+        character.favorites &&
+        character.team &&
+        character.avatar && (
+          <Button
+            onClick={() => setDone(true)}
+            variant="contained"
+            color="primary"
+            component="span"
+          >
+            Done !
+          </Button>
+        )}
     </div>
   )
 }
